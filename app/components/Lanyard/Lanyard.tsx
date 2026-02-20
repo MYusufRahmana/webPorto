@@ -2,7 +2,7 @@
 /* eslint-disable react/no-unknown-property */
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { Canvas, extend, useFrame } from "@react-three/fiber";
+import { Canvas, extend, useFrame, ThreeEvent } from "@react-three/fiber";
 import {
   useGLTF,
   useTexture,
@@ -24,11 +24,20 @@ import "./Lanyard.css";
 const cardGLB = "/assets/Lanyard/card.glb";
 const lanyard = "/assets/Lanyard/lanyard.png";
 
+// Register the custom elements
 extend({ MeshLineGeometry, MeshLineMaterial });
 
+// Declare module to add types for JSX
+declare module "@react-three/fiber" {
+  interface ThreeElements {
+    meshLineGeometry: any;
+    meshLineMaterial: any;
+  }
+}
+
 export default function Lanyard({
-  position = [0, 0, 30],
-  gravity = [0, -40, 0],
+  position = [0, 0, 30] as [number, number, number],
+  gravity = [0, -40, 0] as [number, number, number],
   fov = 20,
   transparent = true,
 }) {
@@ -47,7 +56,10 @@ export default function Lanyard({
       style={{ width: "100%", height: "100%", position: "relative" }}
     >
       <Canvas
-        camera={{ position: position, fov: fov }}
+        camera={{
+          position: position as [number, number, number],
+          fov: fov,
+        }}
         dpr={[1, isMobile ? 1 : 2]}
         gl={{ alpha: transparent, antialias: !isMobile }}
         style={{ width: "100%", height: "100%", display: "block" }}
@@ -56,7 +68,10 @@ export default function Lanyard({
         }
       >
         <ambientLight intensity={isMobile ? 0.8 : Math.PI} />
-        <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
+        <Physics
+          gravity={gravity as [number, number, number]}
+          timeStep={isMobile ? 1 / 30 : 1 / 60}
+        >
           <Band isMobile={isMobile} />
         </Physics>
         <Environment blur={0.75}>
@@ -110,7 +125,6 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
   const segmentProps = {
     type: "dynamic" as const,
     canSleep: true,
-    colliders: false,
     angularDamping: 4,
     linearDamping: 4,
   };
@@ -145,6 +159,26 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
       return () => void (document.body.style.cursor = "auto");
     }
   }, [hovered, dragged]);
+
+  const handlePointerUp = (e: ThreeEvent<PointerEvent>) => {
+    if (e.target) {
+      (e.target as any).releasePointerCapture?.(e.pointerId);
+    }
+    drag(false);
+  };
+
+  const handlePointerDown = (e: ThreeEvent<PointerEvent>) => {
+    if (e.target) {
+      (e.target as any).setPointerCapture?.(e.pointerId);
+    }
+    if (card.current) {
+      drag(
+        new THREE.Vector3()
+          .copy(e.point)
+          .sub(vec.copy(card.current.translation())),
+      );
+    }
+  };
 
   useFrame((state, delta) => {
     if (dragged && card.current) {
@@ -214,21 +248,41 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
   return (
     <>
       <group position={[0, isMobile ? 3 : 4, 0]}>
-        <RigidBody ref={fixed} {...segmentProps} type="fixed" />
-        <RigidBody position={[0.5, 0, 0]} ref={j1} {...segmentProps}>
+        <RigidBody ref={fixed} type="fixed" />
+
+        <RigidBody
+          position={[0.5, 0, 0]}
+          ref={j1}
+          {...segmentProps}
+          colliders={false}
+        >
           <BallCollider args={[0.1]} />
         </RigidBody>
-        <RigidBody position={[1, 0, 0]} ref={j2} {...segmentProps}>
+
+        <RigidBody
+          position={[1, 0, 0]}
+          ref={j2}
+          {...segmentProps}
+          colliders={false}
+        >
           <BallCollider args={[0.1]} />
         </RigidBody>
-        <RigidBody position={[1.5, 0, 0]} ref={j3} {...segmentProps}>
+
+        <RigidBody
+          position={[1.5, 0, 0]}
+          ref={j3}
+          {...segmentProps}
+          colliders={false}
+        >
           <BallCollider args={[0.1]} />
         </RigidBody>
+
         <RigidBody
           position={[2, 0, 0]}
           ref={card}
           {...segmentProps}
           type={dragged ? "kinematicPosition" : "dynamic"}
+          colliders={false}
         >
           <CuboidCollider args={[0.8, 1.125, 0.01]} />
           <group
@@ -236,20 +290,8 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
             position={[0, -1.2, -0.05]}
             onPointerOver={() => hover(true)}
             onPointerOut={() => hover(false)}
-            onPointerUp={(e) => {
-              e.target.releasePointerCapture(e.pointerId);
-              drag(false);
-            }}
-            onPointerDown={(e) => {
-              e.target.setPointerCapture(e.pointerId);
-              if (card.current) {
-                drag(
-                  new THREE.Vector3()
-                    .copy(e.point)
-                    .sub(vec.copy(card.current.translation())),
-                );
-              }
-            }}
+            onPointerUp={handlePointerUp}
+            onPointerDown={handlePointerDown}
           >
             <mesh geometry={(nodes as any).card.geometry}>
               <meshPhysicalMaterial

@@ -4,7 +4,9 @@
 import { motion } from "motion/react";
 import GlitchText from "../GlitchText/GlitchText";
 import ScrollVelocity from "../ScrollVelocity/ScrollVelocity";
-import RotatingText from "../RotatingText/RotatingText";
+// Perbaiki import menjadi default import
+// app/components/Sections/HeroSections.tsx
+import RotatingText from "../RotatingText/RotatingText"; // This should point to your .tsx file
 import Squares from "../Squares/Squares";
 import { useEffect, useState } from "react";
 
