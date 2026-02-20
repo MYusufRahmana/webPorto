@@ -1,0 +1,244 @@
+.glitch {
+  color: #fff;
+  font-size: clamp(1.5rem, 5vw, 3.5rem); /* Diperkecil dari sebelumnya */
+  white-space: nowrap;
+  font-weight: 900;
+  position: relative;
+  margin: 0 auto;
+  user-select: none;
+  cursor: pointer;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  transition: text-shadow 0.3s ease;
+}
+
+/* Style spesifik untuk setiap baris teks */
+.glitch.ready-jobs {
+  font-size: clamp(
+    1.2rem,
+    4vw,
+    2.5rem
+  ); /* Lebih kecil untuk "Im Ready For Jobs" */
+}
+
+.glitch.web-dev {
+  font-size: clamp(
+    1.8rem,
+    6vw,
+    4rem
+  ); /* Sedikit lebih besar untuk "WEB Developer" */
+}
+
+.glitch.hi-name {
+  font-size: clamp(
+    2rem,
+    7vw,
+    5rem
+  ); /* Paling besar untuk "HI, I'M YUSUF" (nama) */
+}
+
+.glitch:hover {
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
+
+.glitch::after,
+.glitch::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #fff;
+  background-color: #060010;
+  overflow: hidden;
+  clip-path: inset(0 0 0 0);
+  opacity: 0.9;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.glitch::after {
+  text-shadow: var(
+    --after-shadow,
+    -2px 0 #ff00ff,
+    -4px 0 #00ffff
+  ); /* Bayangan lebih kecil */
+  animation: glitch-animation-1 var(--after-duration, 3s) infinite steps(2, end)
+    alternate-reverse;
+  z-index: 1;
+}
+
+.glitch::before {
+  text-shadow: var(
+    --before-shadow,
+    2px 0 #00ffff,
+    4px 0 #ff00ff
+  ); /* Bayangan lebih kecil */
+  animation: glitch-animation-2 var(--before-duration, 2s) infinite
+    steps(2, end) alternate-reverse;
+  z-index: 2;
+}
+
+.glitch:not(.enable-on-hover)::after {
+  left: 3px; /* Dikurangi dari 5px */
+}
+
+.glitch:not(.enable-on-hover)::before {
+  left: -3px; /* Dikurangi dari -5px */
+}
+
+.glitch.enable-on-hover::after,
+.glitch.enable-on-hover::before {
+  content: "";
+  opacity: 0;
+  animation: none;
+}
+
+.glitch.enable-on-hover:hover::after {
+  content: attr(data-text);
+  opacity: 1;
+  left: 5px; /* Dikurangi dari 8px */
+  text-shadow: var(--after-shadow, -3px 0 #ff00ff, -6px 0 #00ffff);
+  animation: glitch-animation-1 var(--after-duration, 3s) infinite steps(2, end)
+    alternate-reverse;
+}
+
+.glitch.enable-on-hover:hover::before {
+  content: attr(data-text);
+  opacity: 1;
+  left: -5px; /* Dikurangi dari -8px */
+  text-shadow: var(--before-shadow, 3px 0 #00ffff, 6px 0 #ff00ff);
+  animation: glitch-animation-2 var(--before-duration, 2s) infinite
+    steps(2, end) alternate-reverse;
+}
+
+@keyframes glitch-animation-1 {
+  0% {
+    clip-path: inset(20% 0 30% 0);
+    transform: translate(0);
+  }
+  10% {
+    clip-path: inset(10% 0 60% 0);
+    transform: translate(-1px); /* Dikurangi dari -2px */
+  }
+  20% {
+    clip-path: inset(40% 0 20% 0);
+    transform: translate(1px); /* Dikurangi dari 2px */
+  }
+  30% {
+    clip-path: inset(80% 0 5% 0);
+    transform: translate(-0.5px);
+  }
+  40% {
+    clip-path: inset(15% 0 55% 0);
+    transform: translate(1.5px);
+  }
+  50% {
+    clip-path: inset(5% 0 75% 0);
+    transform: translate(-1.5px);
+  }
+  60% {
+    clip-path: inset(45% 0 25% 0);
+    transform: translate(1px);
+  }
+  70% {
+    clip-path: inset(25% 0 45% 0);
+    transform: translate(-1px);
+  }
+  80% {
+    clip-path: inset(65% 0 15% 0);
+    transform: translate(0.5px);
+  }
+  90% {
+    clip-path: inset(35% 0 35% 0);
+    transform: translate(-0.5px);
+  }
+  100% {
+    clip-path: inset(55% 0 25% 0);
+    transform: translate(0);
+  }
+}
+
+@keyframes glitch-animation-2 {
+  0% {
+    clip-path: inset(30% 0 40% 0);
+    transform: translate(0);
+  }
+  10% {
+    clip-path: inset(60% 0 10% 0);
+    transform: translate(1px);
+  }
+  20% {
+    clip-path: inset(20% 0 50% 0);
+    transform: translate(-1px);
+  }
+  30% {
+    clip-path: inset(5% 0 85% 0);
+    transform: translate(1.5px);
+  }
+  40% {
+    clip-path: inset(55% 0 15% 0);
+    transform: translate(-1.5px);
+  }
+  50% {
+    clip-path: inset(75% 0 5% 0);
+    transform: translate(0.5px);
+  }
+  60% {
+    clip-path: inset(25% 0 45% 0);
+    transform: translate(-0.5px);
+  }
+  70% {
+    clip-path: inset(45% 0 35% 0);
+    transform: translate(1px);
+  }
+  80% {
+    clip-path: inset(15% 0 65% 0);
+    transform: translate(-1px);
+  }
+  90% {
+    clip-path: inset(35% 0 25% 0);
+    transform: translate(0.5px);
+  }
+  100% {
+    clip-path: inset(25% 0 55% 0);
+    transform: translate(0);
+  }
+}
+
+.glitch::after {
+  filter: blur(0.3px); /* Dikurangi dari 0.5px */
+}
+
+.glitch::before {
+  filter: blur(0.2px); /* Dikurangi dari 0.3px */
+}
+
+@media (max-width: 768px) {
+  .glitch {
+    font-size: clamp(1.2rem, 6vw, 2.5rem);
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .glitch.ready-jobs {
+    font-size: clamp(1rem, 4vw, 2rem);
+  }
+
+  .glitch.web-dev {
+    font-size: clamp(1.5rem, 5vw, 2.8rem);
+  }
+
+  .glitch.hi-name {
+    font-size: clamp(1.8rem, 7vw, 3.5rem);
+  }
+
+  .glitch:not(.enable-on-hover)::after {
+    left: 2px;
+  }
+
+  .glitch:not(.enable-on-hover)::before {
+    left: -2px;
+  }
+}
