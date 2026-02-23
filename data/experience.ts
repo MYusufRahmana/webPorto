@@ -2,20 +2,23 @@
 export const experiencesData = [
   {
     id: 1,
-    position: "Frontend Developer",
-    company: "PT Teknologi Maju",
+    position: "Web Developer",
+    company: "Balai Besar K3 Jakarta",
     location: "Jakarta, Indonesia",
-    start_date: "Jan 2023",
+    start_date: "Des 2025",
     end_date: "Present",
-    image:
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1744&auto=format&fit=crop",
-    description: [
-      "Mengembangkan aplikasi web menggunakan React dan Next.js untuk klien enterprise",
-      "Berkolaborasi dengan tim desain untuk implementasi UI/UX yang responsif dan modern",
-      "Optimasi performa aplikasi hingga 40% melalui code splitting dan lazy loading",
-      "Memimpin daily stand-up dan code review untuk tim frontend",
+    images: [
+      "/assets/Experience/fotoBalai.jpeg",
+      "/assets/Experience/fotobalai2.jpeg", // Tambahkan gambar lain jika ada
+      "/assets/Experience/fotobalai3.jpeg",
     ],
-    technologies: ["React", "Next.js", "Tailwind CSS", "TypeScript", "Redux"],
+    description: [
+      "Mengembangkan website Balai Besar K3 Jakarta menggunakan Laravel dan Tailwind CSS",
+      "Mengembangkan website Pelanayanan Balai Besar K3 Jakarta menggunakan Laravel dan Tailwind CSS",
+      "Bekerja sama dengan tim desain untuk memastikan tampilan yang responsif dan menarik",
+      "Mengoptimalkan performa website untuk meningkatkan pengalaman pengguna",
+    ],
+    technologies: ["Laravel", "MySql", "Tailwind CSS", "CSS"],
   },
   {
     id: 2,
@@ -24,8 +27,11 @@ export const experiencesData = [
     location: "Bandung, Indonesia",
     start_date: "Jun 2022",
     end_date: "Dec 2022",
-    image:
+    images: [
       "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1740&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1742&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1740&auto=format&fit=crop",
+    ],
     description: [
       "Membantu pengembangan fitur baru pada aplikasi mobile menggunakan Flutter",
       "Testing dan debugging aplikasi untuk memastikan kualitas code",
@@ -41,8 +47,10 @@ export const experiencesData = [
     location: "Yogyakarta, Indonesia",
     start_date: "Jan 2022",
     end_date: "May 2022",
-    image:
+    images: [
       "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1740&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1744&auto=format&fit=crop",
+    ],
     description: [
       "Mempelajari dan mengimplementasikan teknologi web development",
       "Membantu tim dalam pembuatan website company profile",

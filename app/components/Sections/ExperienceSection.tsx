@@ -10,8 +10,22 @@ import { experiencesData } from "@/data/experience";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Definisikan interface yang sesuai dengan data
+interface ExperienceItem {
+  id: number;
+  position: string;
+  company: string;
+  location?: string;
+  start_date: string;
+  end_date: string;
+  description: string[];
+  technologies: string[];
+  images?: string[] | null;
+  image?: string | null;
+}
+
 interface ExperienceSectionProps {
-  experiences?: typeof experiencesData;
+  experiences?: ExperienceItem[];
 }
 
 export function ExperienceSection({
@@ -101,6 +115,35 @@ export function ExperienceSection({
             className="w-16 h-0.5 bg-gradient-to-r from-transparent via-[#C6F10E] to-transparent mx-auto mt-3"
           />
         </div>
+
+        {/* Stats Cards */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="flex justify-center gap-8 mb-8"
+        >
+          <div className="text-center">
+            <div className="text-2xl font-bold text-[#C6F10E]">
+              {totalYears}+
+            </div>
+            <div className="text-xs text-gray-400">Years Experience</div>
+          </div>
+          <div className="w-px h-8 bg-gray-700" />
+          <div className="text-center">
+            <div className="text-2xl font-bold text-[#C6F10E]">
+              {experiences.length}
+            </div>
+            <div className="text-xs text-gray-400">Companies</div>
+          </div>
+          <div className="w-px h-8 bg-gray-700" />
+          <div className="text-center">
+            <div className="text-2xl font-bold text-[#C6F10E]">
+              {totalTechs}+
+            </div>
+            <div className="text-xs text-gray-400">Technologies</div>
+          </div>
+        </motion.div>
 
         {/* Timeline */}
         <Timeline data={experiences} />
