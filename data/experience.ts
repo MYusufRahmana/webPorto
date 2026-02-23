@@ -20,44 +20,6 @@ export const experiencesData = [
     ],
     technologies: ["Laravel", "MySql", "Tailwind CSS", "CSS"],
   },
-  {
-    id: 2,
-    position: "Junior Developer",
-    company: "Startup Digital",
-    location: "Bandung, Indonesia",
-    start_date: "Jun 2022",
-    end_date: "Dec 2022",
-    images: [
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1740&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1742&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1740&auto=format&fit=crop",
-    ],
-    description: [
-      "Membantu pengembangan fitur baru pada aplikasi mobile menggunakan Flutter",
-      "Testing dan debugging aplikasi untuk memastikan kualitas code",
-      "Dokumentasi kode dan membuat panduan penggunaan aplikasi",
-      "Berkontribusi dalam sprint planning dan retrospective",
-    ],
-    technologies: ["Flutter", "Firebase", "GetX", "Git"],
-  },
-  {
-    id: 3,
-    position: "Intern Web Developer",
-    company: "Digital Agency",
-    location: "Yogyakarta, Indonesia",
-    start_date: "Jan 2022",
-    end_date: "May 2022",
-    images: [
-      "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1740&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1744&auto=format&fit=crop",
-    ],
-    description: [
-      "Mempelajari dan mengimplementasikan teknologi web development",
-      "Membantu tim dalam pembuatan website company profile",
-      "Melakukan testing dan debugging aplikasi",
-    ],
-    technologies: ["HTML", "CSS", "JavaScript", "PHP", "Laravel"],
-  },
 ];
 
 export function getCurrentExperience() {

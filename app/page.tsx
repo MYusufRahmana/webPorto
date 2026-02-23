@@ -31,6 +31,8 @@ import {
   SiPython,
 } from "react-icons/si";
 import { FaGithub, FaGitAlt, FaNodeJs } from "react-icons/fa";
+import { ProjectSection } from "./components/Sections/ProjectSection";
+import ExpandableCardDemo from "./components/demo-grid/expandable-card-demo-standard";
 
 // Definisikan techLogos di sini
 const techLogos = [
@@ -202,6 +204,25 @@ export default function Home() {
       {/* Project Section */}
       <ExperienceSection experiences={experiencesData} />
 
+      {/* Tech Divider - Right */}
+      <div className="relative py-8 my-8">
+        <div className="relative z-10 w-full px-0">
+          <div className="h-[80px] relative overflow-hidden w-full">
+            <LogoLoop
+              logos={techLogos}
+              speed={80}
+              direction="right"
+              logoHeight={50}
+              gap={60}
+              scaleOnHover
+              ariaLabel="Technology stack"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Project Section */}
+      <ProjectSection projects={projectsData} />
       {/* Tech Divider - Right */}
       <div className="relative py-8 my-8">
         <div className="relative z-10 w-full px-0">
