@@ -18,7 +18,10 @@ export const profileData = {
     "MySQL",
   ],
   photo_url: "/images/profile.jpg",
-  cv_url: "/files/cv-yusuf.pdf",
+  cv_url:
+    "https://drive.google.com/file/d/1MYSqZP2Mglmtl_lNWIGYVyHYvd6pdSB1/view?usp=sharing", // Contoh link Google Drive
+  // atau
+  // cv_url: "/files/cv-yusuf.pdf", // Jika file lokal
   social_media: {
     github: "https://github.com/MYusufRahmana",
     linkedin: "https://linkedin.com/in/yusufrahmana",

@@ -4,9 +4,7 @@
 import { motion } from "motion/react";
 import GlitchText from "../GlitchText/GlitchText";
 import ScrollVelocity from "../ScrollVelocity/ScrollVelocity";
-// Perbaiki import menjadi default import
-// app/components/Sections/HeroSections.tsx
-import RotatingText from "../RotatingText/RotatingText"; // This should point to your .tsx file
+import RotatingText from "../RotatingText/RotatingText";
 import Squares from "../Squares/Squares";
 import { useEffect, useState } from "react";
 
@@ -32,6 +30,23 @@ export function HeroSection({
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
+
+  // Fungsi untuk membuka CV di tab baru
+  const handleViewCV = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!cvUrl) {
+      e.preventDefault();
+      alert("CV tidak tersedia");
+      return;
+    }
+
+    // Untuk file lokal, biarkan browser yang handle
+    // Untuk link eksternal, buka di tab baru
+    if (cvUrl.startsWith("http")) {
+      e.preventDefault();
+      window.open(cvUrl, "_blank", "noopener,noreferrer");
+    }
+    // Jika file lokal, tidak perlu preventDefault
+  };
 
   return (
     <section className="relative min-h-screen overflow-hidden bg-[#19222D]">
@@ -100,7 +115,7 @@ export function HeroSection({
               />
             </div>
 
-            {/* Download CV Button */}
+            {/* Lihat CV Button - Changed from Download CV */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -109,10 +124,14 @@ export function HeroSection({
             >
               <motion.a
                 href={cvUrl || "#"}
-                download={!!cvUrl}
+                onClick={handleViewCV}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="group relative inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 bg-[#C6F10E] text-[#19222D] font-semibold rounded-lg overflow-hidden shadow-lg shadow-[#C6F10E]/20 hover:shadow-xl hover:shadow-[#C6F10E]/30 transition-all duration-300 text-sm sm:text-base"
+                className="group relative inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 bg-[#C6F10E] text-[#19222D] font-semibold rounded-lg overflow-hidden shadow-lg shadow-[#C6F10E]/20 hover:shadow-xl hover:shadow-[#C6F10E]/30 transition-all duration-300 text-sm sm:text-base cursor-pointer"
+                target={cvUrl?.startsWith("http") ? "_blank" : undefined}
+                rel={
+                  cvUrl?.startsWith("http") ? "noopener noreferrer" : undefined
+                }
               >
                 <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
                 <svg
@@ -120,15 +139,22 @@ export function HeroSection({
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
-                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
                   />
                 </svg>
-                <span className="relative z-10">Download CV</span>
+                <span className="relative z-10">Lihat CV</span>
               </motion.a>
             </motion.div>
           </motion.div>
