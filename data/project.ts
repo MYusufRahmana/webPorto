@@ -30,6 +30,16 @@ export const projectsData = [
     image: "/assets/Projects/fotoAbsensiKehadiran.jpg",
     project_url: "https://ecommerce.demo.com",
   },
+  {
+    id: 4,
+    title: "Website Balai Besar K3 Jakarta ",
+    short_description:
+      "Website informasi dan layanan K3 untuk Balai Besar K3 Jakarta",
+    description:
+      "Website informasi dan layanan K3 untuk Balai Besar K3 Jakarta yang menyediakan berbagai informasi terkait keselamatan dan kesehatan kerja.",
+    image: "/assets/Experience/fotobalai3.jpeg",
+    project_url: "https://balaibesark3jakarta.kemnaker.go.id/",
+  },
 ];
 
 export function getProjectById(id: number) {
